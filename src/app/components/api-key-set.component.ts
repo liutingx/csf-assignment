@@ -27,12 +27,11 @@ export class ApiKeySetComponent implements OnInit {
   }
 
   async deleteApi(){
-    console.log('delete')
     await this.newsdatabase.deleteApiKey(this.form.get('apiKey').value)
+    this.form.reset();
   }
 
   async addApi(){
-    console.log('add', this.form.get('apiKey').value)
     this.newsdatabase.saveApiKey(this.form.value)
     this.router.navigate(['/'])
   }

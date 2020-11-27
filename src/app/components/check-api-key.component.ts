@@ -18,8 +18,7 @@ export class CheckApiKeyComponent implements OnInit {
     .then(result => {
       this.API_KEY = result.map(s => {
         return s.apiKey
-      }) 
-      console.log('myapi', this.API_KEY)
+      })
       if(this.API_KEY.length){
         this.router.navigate(['/countrylist'])
       }
@@ -27,12 +26,6 @@ export class CheckApiKeyComponent implements OnInit {
         this.router.navigate(['/setapikey'])
       }
     })
-    
-    
-
-
-    
-    //console.log(this.api.apikey)
   }
 
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NewsDatabase } from '../database.service';
-import { CountryDB } from '../models';
 
 @Component({
   selector: 'app-country-list',
@@ -17,20 +16,31 @@ export class CountryListComponent implements OnInit {
   constructor(private http: HttpClient, private newsdatabase: NewsDatabase) { }
 
   ngOnInit(): void {
-    const url = 'https://restcountries.eu/rest/v2/alpha'
+    
+    this.newsdatabase.getCountryList()
+    .then(result => {
+      if(result.length == 0){
+        this.checkForCountries();
+      }
+      else{
+        this.data = result[0];
+      }
+    }) 
+  
+  }
+
+checkForCountries(){ 
+  const url = 'https://restcountries.eu/rest/v2/alpha'
     const params = (new HttpParams()).set('codes', this.countries)
     this.http.get<any>(url, {params: params})
     .toPromise()
     .then(results => {
-      //console.log('results', results)
       this.data = results.map(d => {
         return {name:d.name, flag:d.flag, code: d.alpha2Code.toLowerCase()}
       })
-      //console.log('data', this.data)
       this.newsdatabase.saveCountryList(this.data)
     })
-    
-    
-
   }
+
+
 }
