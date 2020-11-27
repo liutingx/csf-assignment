@@ -1,0 +1,19 @@
+<div class="row mt-4">
+    <div class="col d-flex justify-content-between align-items-center">
+        <h3>Countries</h3>
+        <button type="button" class="btn btn-primary" [routerLink]="['/setapikey']">Settings</button>
+    </div>
+</div>
+
+<!-- <ul class="list-group mt-4">
+    <a *ngFor='let each of data' class="list-group-item justify-content-between">
+        {{each.name}} </a>
+</ul> -->
+
+<ul class="list-group mt-4">
+    <div *ngFor='let each of data' class="d-flex list-group-item justify-content-between align-items-center">
+        <a [routerLink]="['/news',each.code]">{{each.name}}</a>
+        <img src="{{each.flag}}" alt="{{each.name}}" width="80px;">
+    </div>
+    
+</ul>
